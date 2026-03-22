@@ -1,0 +1,2933 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0618">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>معايدة عيد الفطر</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ════ RESET & BASE ════ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --pink: #e91e8c;
+      --pink-light: #ff6bb3;
+      --pink-glow: rgba(233, 30, 140, .35);
+      --pink-deep: #c2185b;
+      --purple: #1a0a2e;
+      --purple-deep: #0d0618;
+      --purple-light: #2a1248;
+      --card: rgba(31, 16, 64, 0.8);
+      --text: #f0e6ff;
+      --gold: #d4a847;
+      --gold-light: #f0d078;
+      --gold-deep: #b8922e;
+      --gold-glow: rgba(212, 168, 71, .35);
+      --cream: #fff8f0;
+      --accent: #ff9a3c;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--purple-deep);
+      font-family: 'Amiri', serif;
+      color: var(--text);
+      overflow: hidden;
+      height: 100vh;
+      height: 100dvh;
+      width: 100vw;
+      cursor: default;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ════ LOADING SCREEN ════ */
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      transition: opacity .8s ease, visibility .8s ease;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-crescent {
+      width: 90px;
+      height: 90px;
+      position: relative;
+      animation: loaderFloat 2s ease-in-out infinite;
+    }
+
+    .loader-crescent svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 20px rgba(212, 168, 71, 0.6));
+    }
+
+    .loader-ring {
+      position: absolute;
+      inset: -12px;
+      border: 2px solid transparent;
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: loaderSpin 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+    }
+
+    .loader-ring-inner {
+      position: absolute;
+      inset: -4px;
+      border: 1.5px solid transparent;
+      border-top-color: var(--pink-light);
+      border-radius: 50%;
+      animation: loaderSpin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite reverse;
+    }
+
+    @keyframes loaderSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes loaderFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .loader-text {
+      font-family: 'Scheherazade New', serif;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--pink-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: loaderPulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes loaderPulse {
+      0%, 100% {
+        opacity: 0.5;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* ════ STARS BG ════ */
+    #stars-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ════ PARTICLES ════ */
+    #particles-container {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleFloat var(--duration) ease-in-out infinite;
+      animation-delay: var(--delay);
+      will-change: transform, opacity;
+    }
+
+    .particle-pink {
+      background: var(--pink-light);
+    }
+
+    .particle-gold {
+      background: var(--gold-light);
+    }
+
+    @keyframes particleFloat {
+      0% {
+        opacity: 0;
+        transform: translateY(100vh) scale(0) rotate(0deg);
+      }
+      10% {
+        opacity: 0.6;
+      }
+      90% {
+        opacity: 0.4;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-50px) scale(1) rotate(180deg);
+      }
+    }
+
+    /* ════ SCROLL CONTAINER ════ */
+    #app {
+      position: relative;
+      z-index: 10;
+      height: 100vh;
+      height: 100dvh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #app::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* ════ SECTION BASE ════ */
+    .sec {
+      height: 100vh;
+      height: 100dvh;
+      min-height: 100vh;
+      min-height: 100dvh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 28px;
+      overflow: hidden;
+    }
+
+    .sec::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .6s ease;
+    }
+
+    .sec.active::before {
+      opacity: 1;
+    }
+
+    /* ════ GLOW BLOBS ════ */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      transition: transform 8s ease-in-out;
+      will-change: transform;
+    }
+
+    .blob-pink {
+      background: rgba(233, 30, 140, .18);
+    }
+
+    .blob-purple {
+      background: rgba(100, 40, 200, .16);
+    }
+
+    .blob-gold {
+      background: rgba(212, 168, 71, .12);
+    }
+
+    /* ════ LANTERN DECORATION ════ */
+    .lantern {
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+      transform-origin: top center;
+    }
+
+    .lantern svg {
+      filter: drop-shadow(0 8px 25px rgba(212, 168, 71, 0.4));
+    }
+
+    .lantern-left {
+      top: -5px;
+      left: 8%;
+      animation: lanternSway 5s ease-in-out infinite;
+    }
+
+    .lantern-right {
+      top: -5px;
+      right: 8%;
+      animation: lanternSway 6s ease-in-out infinite reverse;
+    }
+
+    .lantern-center {
+      top: -5px;
+      left: 50%;
+      margin-left: -20px;
+      animation: lanternSway 7s ease-in-out infinite;
+    }
+
+    @keyframes lanternSway {
+      0%, 100% {
+        transform: rotate(-3deg);
+      }
+      50% {
+        transform: rotate(3deg);
+      }
+    }
+
+    /* ════ NAV DOTS ════ */
+    #dots {
+      position: fixed;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .15);
+      border: 2px solid rgba(255, 255, 255, .2);
+      cursor: pointer;
+      transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    .dot::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      transition: all .3s ease;
+    }
+
+    .dot:hover {
+      background: rgba(255, 255, 255, .3);
+      transform: scale(1.2);
+    }
+
+    .dot.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      box-shadow: 0 0 15px var(--gold-glow), 0 0 30px rgba(212, 168, 71, .2);
+    }
+
+    .dot.active::after {
+      border-color: rgba(212, 168, 71, .3);
+    }
+
+    /* ════ BADGE ════ */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(212, 168, 71, .4);
+      background: linear-gradient(135deg, rgba(212, 168, 71, .12), rgba(212, 168, 71, .04));
+      border-radius: 50px;
+      padding: 8px 20px;
+      font-size: .85rem;
+      letter-spacing: 1px;
+      color: var(--gold-light);
+      margin-bottom: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(212, 168, 71, .12);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all .6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .badge.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .badge svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: var(--gold-light);
+      stroke-width: 2;
+    }
+
+    /* ════ TEXT LOOP ════ */
+    .text-loop-container {
+      height: clamp(70px, 15vw, 120px);
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .text-loop-wrapper {
+      position: relative;
+      height: 100%;
+    }
+
+    .text-loop-item {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--pink-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 25px rgba(212, 168, 71, .4));
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .7s cubic-bezier(0.16, 1, 0.3, 1),
+        transform .7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .text-loop-item.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .text-loop-item.exit {
+      opacity: 0;
+      transform: translateY(-40px);
+    }
+
+    /* ════ LABELS & TEXT ════ */
+    .s1-label {
+      font-size: clamp(.8rem, 2vw, 1rem);
+      color: rgba(240, 230, 255, .5);
+      letter-spacing: 4px;
+      margin-bottom: 14px;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all .6s ease .2s;
+    }
+
+    .s1-label.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .s1-sub {
+      font-size: clamp(.9rem, 2vw, 1.1rem);
+      color: rgba(240, 230, 255, .5);
+      margin: 18px 0 28px;
+      letter-spacing: 2px;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all .6s ease .4s;
+    }
+
+    .s1-sub.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ════ SHIMMER TEXT ════ */
+    .shimmer-text {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(2.2rem, 7vw, 4.5rem);
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.35;
+      background: linear-gradient(
+        90deg,
+        #fff 0%,
+        var(--gold-light) 20%,
+        #fff 40%,
+        var(--gold-light) 60%,
+        #fff 80%,
+        var(--gold-light) 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite;
+      filter: drop-shadow(0 0 30px rgba(212, 168, 71, .3));
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all .8s cubic-bezier(0.16, 1, 0.3, 1) .2s;
+    }
+
+    .shimmer-text.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% center;
+      }
+      100% {
+        background-position: -200% center;
+      }
+    }
+
+    /* ════ BUTTONS ════ */
+    .btn-open {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 40px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+      border: none;
+      border-radius: 50px;
+      color: #fff;
+      font-family: 'Amiri', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 1px;
+      box-shadow: 0 6px 30px rgba(212, 168, 71, .4);
+      transition: transform .3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow .3s ease;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .btn-open.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity .6s ease .5s, transform .6s cubic-bezier(0.34, 1.56, 0.64, 1) .5s, box-shadow .3s ease;
+    }
+
+    .btn-open::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+
+    .btn-open:hover::before {
+      opacity: 1;
+    }
+
+    .btn-open:hover,
+    .btn-open.visible:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 10px 40px rgba(212, 168, 71, .5);
+      transition-delay: 0s;
+    }
+
+    .btn-open:active,
+    .btn-open.visible:active {
+      transform: translateY(0) scale(0.98);
+      transition-delay: 0s;
+    }
+
+    .btn-open span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-open svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2.5;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Ripple */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .4);
+      transform: scale(0);
+      animation: ripple .6s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    .music-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid rgba(212, 168, 71, .3);
+      background: linear-gradient(135deg, rgba(212, 168, 71, .08), rgba(212, 168, 71, .03));
+      border-radius: 50px;
+      padding: 10px 22px;
+      font-size: .88rem;
+      color: var(--gold-light);
+      margin-bottom: 20px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all .3s ease;
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    .music-pill.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: .3s;
+    }
+
+    .music-pill:hover {
+      background: linear-gradient(135deg, rgba(212, 168, 71, .15), rgba(212, 168, 71, .08));
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(212, 168, 71, .2);
+    }
+
+    .music-pill svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    /* ════ CALLIGRAPHY DECORATION ════ */
+    .calligraphy-wrap {
+      position: relative;
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(25px) scale(0.9);
+      transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .calligraphy-wrap.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .calligraphy-main {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(3.5rem, 12vw, 7rem);
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.2;
+      background: linear-gradient(
+        135deg,
+        var(--gold-light) 0%,
+        #fff 15%,
+        var(--gold) 30%,
+        var(--gold-light) 45%,
+        #fff 55%,
+        var(--gold) 70%,
+        var(--gold-light) 85%,
+        #fff 100%
+      );
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: calligraphyShimmer 5s ease-in-out infinite;
+      filter: drop-shadow(0 0 30px rgba(212, 168, 71, .4))
+             drop-shadow(0 0 60px rgba(212, 168, 71, .15));
+      position: relative;
+    }
+
+    @keyframes calligraphyShimmer {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .calligraphy-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .calligraphy-ornament .orn-line {
+      width: clamp(30px, 10vw, 80px);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .calligraphy-ornament .orn-diamond {
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      opacity: 0.6;
+      animation: diamondPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes diamondPulse {
+      0%, 100% {
+        opacity: 0.4;
+        box-shadow: 0 0 8px rgba(212, 168, 71, 0.3);
+      }
+      50% {
+        opacity: 0.8;
+        box-shadow: 0 0 16px rgba(212, 168, 71, 0.6);
+      }
+    }
+
+    .calligraphy-sparkles {
+      position: absolute;
+      inset: -30px;
+      pointer-events: none;
+    }
+
+    .cal-sparkle {
+      position: absolute;
+      color: var(--gold-light);
+      opacity: 0;
+      animation: sparkleAnim var(--dur, 3s) ease-in-out infinite;
+      animation-delay: var(--del, 0s);
+    }
+
+    @keyframes sparkleAnim {
+      0%, 100% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.2);
+      }
+    }
+
+    /* ════ EMBER PARTICLES ════ */
+    .ember-container {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 3;
+    }
+
+    .ember {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: emberRise var(--dur) ease-out infinite;
+      animation-delay: var(--del);
+      will-change: transform, opacity;
+    }
+
+    @keyframes emberRise {
+      0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0) scale(0.5);
+      }
+      15% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.8;
+        transform: translateY(-45vh) translateX(var(--drift, 20px)) scale(0.8);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-95vh) translateX(var(--drift2, -15px)) scale(0);
+      }
+    }
+
+    /* ════ SECTION 1 — COVER ════ */
+    #s1 {
+      background: radial-gradient(ellipse at 60% 30%, #2a1060 0%, var(--purple-deep) 70%);
+    }
+
+    #s1 .extra-hint {
+      margin-top: 18px;
+      font-size: .75rem;
+      color: rgba(255, 255, 255, .2);
+      opacity: 0;
+      transition: opacity .6s ease .7s;
+    }
+
+    #s1 .extra-hint.visible {
+      opacity: 1;
+    }
+
+    /* ════ SECTION 2 — EID GREETING ════ */
+    #s2 {
+      background: radial-gradient(ellipse at 40% 60%, #220d40 0%, var(--purple-deep) 70%);
+    }
+
+    .crescent-wrap {
+      margin-bottom: 24px;
+      position: relative;
+      opacity: 0;
+      transform: scale(.8);
+      transition: all .8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .crescent-wrap.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .crescent-wrap svg {
+      filter: drop-shadow(0 0 25px rgba(212, 168, 71, .7));
+      animation: moonPulse 3s ease-in-out infinite;
+    }
+
+    .crescent-stars {
+      position: absolute;
+      inset: -20px;
+      pointer-events: none;
+    }
+
+    .crescent-star {
+      position: absolute;
+      color: var(--gold-light);
+      animation: starTwinkle 2s ease-in-out infinite;
+    }
+
+    @keyframes starTwinkle {
+      0%, 100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
+
+    @keyframes moonPulse {
+      0%, 100% {
+        filter: drop-shadow(0 0 20px rgba(212, 168, 71, .5));
+      }
+      50% {
+        filter: drop-shadow(0 0 40px rgba(212, 168, 71, .8));
+      }
+    }
+
+    .s2-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(2.2rem, 7vw, 4.5rem);
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      line-height: 1.35;
+      text-shadow: 0 0 50px rgba(212, 168, 71, .3);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all .8s cubic-bezier(0.16, 1, 0.3, 1) .2s;
+    }
+
+    .s2-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .s2-from {
+      font-size: clamp(.95rem, 2vw, 1.15rem);
+      color: rgba(240, 230, 255, .5);
+      margin-top: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all .6s ease .4s;
+    }
+
+    .s2-from.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .s2-from b {
+      color: var(--gold-light);
+    }
+
+    .s2-scroll-hint {
+      margin-top: 35px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, .3);
+      font-size: .88rem;
+      animation: hintFloat 2.5s ease-in-out infinite;
+      opacity: 0;
+      transition: opacity .6s ease .6s;
+    }
+
+    .s2-scroll-hint.visible {
+      opacity: 1;
+    }
+
+    @keyframes hintFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(8px);
+      }
+    }
+
+    /* ════ ORNAMENTAL DIVIDER ════ */
+    .ornamental-divider {
+      width: clamp(150px, 40vw, 220px);
+      height: 24px;
+      margin: 20px auto;
+      opacity: 0;
+      transition: opacity .6s ease .3s;
+    }
+
+    .ornamental-divider.visible {
+      opacity: 1;
+    }
+
+    .divider-simple {
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 20px auto;
+    }
+
+    /* ════ SECTION 3 — MESSAGE ════ */
+    #s3 {
+      background: radial-gradient(ellipse at 50% 50%, #1a0840 0%, var(--purple-deep) 70%);
+    }
+
+    .quote-mark {
+      font-size: 5rem;
+      color: rgba(212, 168, 71, .35);
+      line-height: 1;
+      margin-bottom: 10px;
+      font-family: Georgia, serif;
+      opacity: 0;
+      transform: scale(.5);
+      transition: all .6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .quote-mark.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .msg-card {
+      max-width: 580px;
+      width: 100%;
+      background: linear-gradient(135deg, rgba(30, 16, 64, .85), rgba(30, 16, 64, .6));
+      border: 1px solid rgba(212, 168, 71, .25);
+      border-radius: 24px;
+      padding: 40px 36px;
+      backdrop-filter: blur(15px);
+      box-shadow:
+        0 10px 50px rgba(0, 0, 0, .4),
+        inset 0 1px 0 rgba(212, 168, 71, .1),
+        0 0 0 1px rgba(212, 168, 71, .05);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px) scale(.95);
+      transition: all .8s cubic-bezier(0.16, 1, 0.3, 1) .2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .msg-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 200%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    }
+
+    .msg-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: -50%;
+      width: 200%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    }
+
+    .msg-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .msg-text {
+      font-family: 'Amiri', serif;
+      font-size: clamp(1.15rem, 3vw, 1.6rem);
+      color: #fff;
+      line-height: 2.1;
+      font-style: italic;
+    }
+
+    .msg-heart {
+      color: var(--pink);
+      font-size: 1.4rem;
+      display: inline-block;
+      animation: heartBeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartBeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      15% {
+        transform: scale(1.25);
+      }
+      30% {
+        transform: scale(1);
+      }
+      45% {
+        transform: scale(1.15);
+      }
+    }
+
+    .msg-from {
+      margin-top: 22px;
+      font-size: .95rem;
+      color: rgba(212, 168, 71, .7);
+      letter-spacing: 2px;
+    }
+
+    /* ════ SENDER PHOTO ════ */
+    .sender-photo {
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--gold);
+      box-shadow: 0 0 20px rgba(212, 168, 71, .4), 0 0 40px rgba(212, 168, 71, .15);
+      margin-bottom: 18px;
+      opacity: 0;
+      transform: scale(.5);
+      transition: all .8s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: photoGlow 3s ease-in-out infinite;
+    }
+
+    .sender-photo.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    @keyframes photoGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(212, 168, 71, .4), 0 0 40px rgba(212, 168, 71, .15); }
+      50% { box-shadow: 0 0 30px rgba(212, 168, 71, .6), 0 0 60px rgba(212, 168, 71, .25); }
+    }
+
+    /* ════ SECTION 4 — ALBUM ════ */
+    #s4 {
+      background: radial-gradient(ellipse at 30% 70%, #1e0a38 0%, var(--purple-deep) 70%);
+    }
+
+    .album-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(1.2rem, 3vw, 1.7rem);
+      color: rgba(212, 168, 71, .7);
+      margin-bottom: 28px;
+      letter-spacing: 3px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all .6s ease;
+    }
+
+    .album-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .book-container {
+      perspective: 1200px;
+      position: relative;
+      width: min(72vw, 260px);
+      aspect-ratio: 1;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all .8s cubic-bezier(0.16, 1, 0.3, 1) .2s;
+    }
+
+    .book-container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Base card visible when all pages flipped */
+    .book-base {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(25, 12, 55, .98), rgba(10, 5, 30, .99));
+      border: 1px solid rgba(212, 168, 71, .3);
+      box-shadow: 0 6px 30px rgba(0, 0, 0, .4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 0;
+    }
+
+    .book-base-content {
+      text-align: center;
+      padding: 24px;
+    }
+
+    .book-base-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .book-base-text {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+      color: var(--gold-light);
+      line-height: 1.5;
+    }
+
+    .book-base-sub {
+      font-size: .8rem;
+      color: rgba(255, 255, 255, .35);
+      margin-top: 10px;
+    }
+
+    .book-page {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      transform-origin: right center;
+      transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+      cursor: pointer;
+      border-radius: 20px;
+    }
+
+    .book-page[data-page="0"] { z-index: 3; }
+    .book-page[data-page="1"] { z-index: 2; }
+
+    .book-page.flipped {
+      transform: rotateY(-180deg);
+      z-index: 0;
+      transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1),
+                  z-index 0s linear 0.4s;
+    }
+
+    .page-front, .page-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .page-front {
+      background: var(--card);
+      border: 1px solid rgba(212, 168, 71, .25);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .3), -3px 0 8px rgba(0, 0, 0, .15);
+    }
+
+    .page-back {
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(30, 16, 64, .95), rgba(15, 8, 40, .98));
+      border: 1px solid rgba(212, 168, 71, .3);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .3), 3px 0 8px rgba(0, 0, 0, .15);
+    }
+
+    .page-front svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .page-back-content {
+      text-align: center;
+      padding: 24px;
+    }
+
+    .page-back-icon {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+    }
+
+    .page-back-text {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      color: var(--gold-light);
+      line-height: 1.6;
+    }
+
+    .page-back-sub {
+      font-size: .85rem;
+      color: rgba(255, 255, 255, .4);
+      margin-top: 8px;
+    }
+
+    .book-nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-top: 20px;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all .6s ease .4s;
+    }
+
+    .book-nav.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .book-nav-btn {
+      background: rgba(212, 168, 71, .12);
+      border: 1px solid rgba(212, 168, 71, .3);
+      color: var(--gold-light);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .3s ease;
+    }
+
+    .book-nav-btn:hover {
+      background: rgba(212, 168, 71, .25);
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(212, 168, 71, .2);
+    }
+
+    .book-nav-btn:active {
+      transform: scale(0.95);
+    }
+
+    .book-nav-btn:disabled {
+      opacity: .3;
+      cursor: default;
+    }
+
+    .book-nav-btn:disabled:hover {
+      transform: none;
+      box-shadow: none;
+      background: rgba(212, 168, 71, .12);
+    }
+
+    .book-page-indicator {
+      font-size: .9rem;
+      color: rgba(212, 168, 71, .6);
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .album-hint {
+      margin-top: 22px;
+      font-size: .85rem;
+      color: rgba(255, 255, 255, .25);
+      text-align: center;
+      opacity: 0;
+      transition: opacity .6s ease .5s;
+    }
+
+    .album-hint.visible {
+      opacity: 1;
+    }
+
+    /* ════ SECTION 5 — MUSIC ════ */
+    #s5 {
+      background: radial-gradient(ellipse at 50% 30%, #2a0845 0%, var(--purple-deep) 70%);
+    }
+
+    .music-icon-wrap {
+      position: relative;
+      margin-bottom: 32px;
+      opacity: 0;
+      transform: scale(.8);
+      transition: all .8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .music-icon-wrap.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .music-orb {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 18px rgba(212, 168, 71, .1),
+        0 0 0 36px rgba(212, 168, 71, .05),
+        0 0 60px rgba(212, 168, 71, .4);
+      animation: orbPulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes orbPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 18px rgba(212, 168, 71, .1), 0 0 0 36px rgba(212, 168, 71, .05), 0 0 60px rgba(212, 168, 71, .35);
+      }
+      50% {
+        box-shadow: 0 0 0 24px rgba(212, 168, 71, .15), 0 0 0 48px rgba(212, 168, 71, .08), 0 0 80px rgba(212, 168, 71, .5);
+      }
+    }
+
+    .music-orb svg {
+      width: 36px;
+      height: 36px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2;
+    }
+
+    .visualizer {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 40px;
+      margin: 6px 0 24px;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all .6s ease .2s;
+    }
+
+    .visualizer.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .viz-bar {
+      width: 4px;
+      border-radius: 3px;
+      background: linear-gradient(to top, var(--gold-deep), var(--gold), var(--gold-light));
+      animation: vizAnim var(--d, .6s) ease-in-out infinite alternate;
+      transition: height .1s ease;
+    }
+
+    @keyframes vizAnim {
+      from {
+        height: 6px;
+        opacity: .6;
+      }
+      to {
+        height: var(--h, 22px);
+        opacity: 1;
+      }
+    }
+
+    .music-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: clamp(1.7rem, 5vw, 2.9rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all .6s ease .3s;
+    }
+
+    .music-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .music-sub {
+      font-size: .95rem;
+      color: rgba(240, 230, 255, .45);
+      margin-bottom: 32px;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all .6s ease .4s;
+    }
+
+    .music-sub.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .music-sub b {
+      color: var(--gold-light);
+    }
+
+    .player-bar {
+      width: min(360px, 90vw);
+      background: linear-gradient(135deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .04));
+      border: 1px solid rgba(212, 168, 71, .15);
+      border-radius: 60px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .3);
+      opacity: 0;
+      transform: translateY(25px);
+      transition: all .6s ease .5s;
+    }
+
+    .player-bar.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .player-time {
+      font-size: .75rem;
+      color: rgba(255, 255, 255, .4);
+      min-width: 30px;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .player-track {
+      flex: 1;
+      height: 4px;
+      background: rgba(255, 255, 255, .15);
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .player-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-light));
+      border-radius: 4px;
+      transition: width .1s;
+      position: relative;
+    }
+
+    .player-fill::after {
+      content: '';
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gold-light);
+      box-shadow: 0 0 10px var(--gold);
+    }
+
+    .play-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(212, 168, 71, .5);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.12);
+      box-shadow: 0 0 30px rgba(212, 168, 71, .6);
+    }
+
+    .play-btn:active {
+      transform: scale(.95);
+    }
+
+    .play-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: #fff;
+      margin-right: -2px;
+    }
+
+    /* ════ VAPOUR TEXT ════ */
+    .vapour-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      height: clamp(80px, 18vw, 140px);
+      margin: 0 auto 10px;
+    }
+
+    .vapour-wrap canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* ════ SCROLL ARROWS ════ */
+    .arrow-down {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(212, 168, 71, .4);
+      font-size: .8rem;
+      margin-top: 8px;
+      cursor: pointer;
+      animation: hintFloat 2.5s ease-in-out infinite;
+      opacity: 0;
+      transition: opacity .6s ease;
+    }
+
+    .arrow-down.visible {
+      opacity: 1;
+    }
+
+    .arrow-down svg {
+      width: 20px;
+      height: 20px;
+      stroke: rgba(212, 168, 71, .4);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .arrow-down:hover {
+      color: rgba(212, 168, 71, .65);
+    }
+
+    .arrow-down:hover svg {
+      stroke: rgba(212, 168, 71, .65);
+    }
+
+    /* ════ CLICK FIRE EFFECTS ════ */
+    .click-ring {
+      position: fixed;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      pointer-events: none;
+      z-index: 100;
+      transform: translate(-50%, -50%);
+      animation: ringOut .6s ease-out forwards;
+    }
+
+    @keyframes ringOut {
+      0% {
+        width: 0;
+        height: 0;
+        opacity: .9;
+        border-color: #ff9a3c;
+      }
+      100% {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+        border-color: #d4a847;
+      }
+    }
+
+    .click-flash {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,160,30,0.9), rgba(255,100,0,0.4), transparent);
+      pointer-events: none;
+      z-index: 100;
+      transform: translate(-50%, -50%);
+      animation: flashOut 0.4s ease-out forwards;
+    }
+
+    @keyframes flashOut {
+      0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* ════ FIREWORK CANVAS ════ */
+    #fw-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* ════ FOOTER TEXT ════ */
+    .footer-text {
+      margin-top: 24px;
+      font-size: .75rem;
+      color: rgba(212, 168, 71, .25);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all .6s ease .6s;
+    }
+
+    .footer-text.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ════ RESPONSIVE ════ */
+    @media(max-width:600px) {
+      .sec {
+        padding: 30px 18px;
+      }
+
+      #dots {
+        left: 8px;
+        gap: 8px;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+      }
+
+      .book-container {
+        width: min(80vw, 230px);
+      }
+
+      .lantern {
+        transform: scale(0.6);
+      }
+
+      .lantern-left {
+        left: 2%;
+      }
+
+      .lantern-right {
+        right: 2%;
+      }
+
+      .msg-card {
+        padding: 24px 18px;
+        border-radius: 18px;
+      }
+
+      .msg-text {
+        font-size: clamp(1rem, 2.8vw, 1.4rem);
+        line-height: 1.9;
+      }
+
+      .calligraphy-main {
+        font-size: clamp(2.8rem, 10vw, 5rem);
+      }
+
+      .badge {
+        padding: 6px 14px;
+        font-size: .78rem;
+      }
+
+      .btn-open {
+        padding: 12px 30px;
+        font-size: 1rem;
+      }
+
+      .music-pill {
+        padding: 8px 16px;
+        font-size: .82rem;
+      }
+
+      .player-bar {
+        width: min(320px, 92vw);
+        padding: 10px 12px;
+        gap: 10px;
+      }
+
+      .sender-photo {
+        width: 75px;
+        height: 75px;
+      }
+
+      .quote-mark {
+        font-size: 3.5rem;
+      }
+
+      .blob {
+        filter: blur(70px);
+      }
+
+      .arrow-down {
+        font-size: .75rem;
+      }
+
+      .s2-scroll-hint {
+        font-size: .8rem;
+      }
+
+      .book-nav-btn {
+        width: 34px;
+        height: 34px;
+      }
+    }
+
+    @media(max-width:380px) {
+      .sec {
+        padding: 24px 14px;
+      }
+
+      .calligraphy-main {
+        font-size: clamp(2.2rem, 9vw, 4rem);
+      }
+
+      .book-container {
+        width: min(88vw, 200px);
+      }
+
+      .sender-photo {
+        width: 65px;
+        height: 65px;
+      }
+
+      .msg-card {
+        padding: 20px 14px;
+      }
+
+      .player-bar {
+        padding: 8px 10px;
+        gap: 8px;
+        border-radius: 40px;
+      }
+
+      .play-btn {
+        width: 38px;
+        height: 38px;
+      }
+
+      .blob {
+        filter: blur(50px);
+      }
+    }
+
+    /* ════ TOUCH DEVICES ════ */
+    @media(hover: none) {
+      .btn-open:hover,
+      .btn-open.visible:hover {
+        transform: translateY(0);
+        box-shadow: 0 6px 30px rgba(212, 168, 71, .4);
+      }
+
+      .book-nav-btn:hover {
+        transform: none;
+        box-shadow: none;
+      }
+
+      button, .music-pill, .arrow-down, .dot {
+        touch-action: manipulation;
+      }
+    }
+
+    /* ════ REDUCED MOTION ════ */
+    @media(prefers-reduced-motion:reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    /* Focus States */
+    button:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-crescent">
+      <div class="loader-ring"></div>
+      <div class="loader-ring-inner"></div>
+      <svg viewBox="0 0 60 60" fill="none">
+        <path d="M42 8 A24 24 0 1 0 42 52 A18 18 0 1 1 42 8Z" fill="url(#loaderMoonGrad)" />
+        <defs>
+          <linearGradient id="loaderMoonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#f0d078" />
+            <stop offset="100%" style="stop-color:#d4a847" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="loader-text">جاري التحميل...</div>
+  </div>
+
+  <!-- AUDIO -->
+  <audio id="bgAudio" preload="auto">
+    <source src="eid-song.m4a" type="audio/mp4">
+  </audio>
+
+  <canvas id="stars-canvas"></canvas>
+  <div id="particles-container"></div>
+  <canvas id="fw-canvas"></canvas>
+
+  <!-- SHARED SVG DEFS -->
+  <svg style="position:absolute;width:0;height:0;" aria-hidden="true">
+    <defs>
+      <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#f0d078" />
+        <stop offset="100%" style="stop-color:#d4a847" />
+      </linearGradient>
+      <linearGradient id="goldGradH" x1="0%" y1="50%" x2="100%" y2="50%">
+        <stop offset="0%" style="stop-color:transparent" />
+        <stop offset="30%" style="stop-color:#d4a847" />
+        <stop offset="50%" style="stop-color:#f0d078" />
+        <stop offset="70%" style="stop-color:#d4a847" />
+        <stop offset="100%" style="stop-color:transparent" />
+      </linearGradient>
+      <linearGradient id="moonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#f0d078" />
+        <stop offset="100%" style="stop-color:#d4a847" />
+      </linearGradient>
+      <linearGradient id="lanternGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#f0d078;stop-opacity:0.3" />
+        <stop offset="50%" style="stop-color:#d4a847;stop-opacity:0.2" />
+        <stop offset="100%" style="stop-color:#b8922e;stop-opacity:0.3" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- NAV DOTS -->
+  <div id="dots">
+    <div class="dot active" data-sec="0"></div>
+    <div class="dot" data-sec="1"></div>
+    <div class="dot" data-sec="2"></div>
+    <div class="dot" data-sec="3"></div>
+    <div class="dot" data-sec="4"></div>
+  </div>
+
+  <div id="app">
+
+    <!-- ══ SECTION 1 — COVER ══ -->
+    <section class="sec" id="s1">
+      <div class="blob blob-pink"
+        style="width:450px;height:450px;top:-120px;right:-100px;animation:blobFloat1 20s ease-in-out infinite;"></div>
+      <div class="blob blob-purple"
+        style="width:400px;height:400px;bottom:-80px;left:-80px;animation:blobFloat2 25s ease-in-out infinite;"></div>
+      <div class="blob blob-gold"
+        style="width:350px;height:350px;top:40%;left:20%;opacity:.4;animation:blobFloat3 18s ease-in-out infinite;">
+      </div>
+
+      <!-- Lanterns -->
+      <div class="lantern lantern-left" data-reveal>
+        <svg width="40" height="85" viewBox="0 0 40 85" fill="none">
+          <line x1="20" y1="0" x2="20" y2="12" stroke="#d4a847" stroke-width="1.5"/>
+          <path d="M14 12 L26 12 L24 17 L16 17 Z" fill="#d4a847"/>
+          <path d="M16 17 Q12 32 13 50 Q15 60 20 64 Q25 60 27 50 Q28 32 24 17 Z"
+                fill="url(#lanternGrad)" stroke="#d4a847" stroke-width="1"/>
+          <line x1="15" y1="30" x2="25" y2="30" stroke="#d4a84760" stroke-width="0.7"/>
+          <line x1="14" y1="42" x2="26" y2="42" stroke="#d4a84760" stroke-width="0.7"/>
+          <ellipse cx="20" cy="38" rx="4" ry="12" fill="#f0d07830"/>
+          <path d="M17 64 L23 64 L22 69 L18 69 Z" fill="#d4a847"/>
+          <line x1="20" y1="69" x2="20" y2="78" stroke="#d4a847" stroke-width="1"/>
+          <circle cx="20" cy="80" r="2.5" fill="#d4a847"/>
+        </svg>
+      </div>
+      <div class="lantern lantern-right" data-reveal>
+        <svg width="40" height="85" viewBox="0 0 40 85" fill="none">
+          <line x1="20" y1="0" x2="20" y2="12" stroke="#d4a847" stroke-width="1.5"/>
+          <path d="M14 12 L26 12 L24 17 L16 17 Z" fill="#d4a847"/>
+          <path d="M16 17 Q12 32 13 50 Q15 60 20 64 Q25 60 27 50 Q28 32 24 17 Z"
+                fill="url(#lanternGrad)" stroke="#d4a847" stroke-width="1"/>
+          <line x1="15" y1="30" x2="25" y2="30" stroke="#d4a84760" stroke-width="0.7"/>
+          <line x1="14" y1="42" x2="26" y2="42" stroke="#d4a84760" stroke-width="0.7"/>
+          <ellipse cx="20" cy="38" rx="4" ry="12" fill="#f0d07830"/>
+          <path d="M17 64 L23 64 L22 69 L18 69 Z" fill="#d4a847"/>
+          <line x1="20" y1="69" x2="20" y2="78" stroke="#d4a847" stroke-width="1"/>
+          <circle cx="20" cy="80" r="2.5" fill="#d4a847"/>
+        </svg>
+      </div>
+
+      <!-- Ember Particles -->
+      <div class="ember-container" id="emberContainer"></div>
+
+      <!-- Animated Calligraphy -->
+      <div class="calligraphy-wrap" data-reveal>
+        <div class="calligraphy-sparkles">
+          <span class="cal-sparkle" style="top:0;left:10%;font-size:12px;--dur:2.5s;--del:0s;">✦</span>
+          <span class="cal-sparkle" style="top:-15px;left:45%;font-size:16px;--dur:3s;--del:0.8s;">✦</span>
+          <span class="cal-sparkle" style="top:5px;right:8%;font-size:10px;--dur:2.8s;--del:1.5s;">✦</span>
+          <span class="cal-sparkle" style="bottom:10px;left:5%;font-size:9px;--dur:3.2s;--del:0.4s;">✦</span>
+          <span class="cal-sparkle" style="bottom:5px;right:12%;font-size:13px;--dur:2.6s;--del:1.2s;">✦</span>
+          <span class="cal-sparkle" style="top:50%;left:0;font-size:8px;--dur:3.5s;--del:2s;">✦</span>
+          <span class="cal-sparkle" style="top:50%;right:0;font-size:11px;--dur:2.9s;--del:0.6s;">✦</span>
+        </div>
+        <div class="calligraphy-main">عيد مبارك</div>
+        <div class="calligraphy-ornament">
+          <span class="orn-line"></span>
+          <span class="orn-diamond"></span>
+          <span class="orn-line"></span>
+        </div>
+      </div>
+
+      <div class="badge" data-reveal>
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <polyline points="16 2 16 6" />
+          <polyline points="8 2 8 6" />
+          <line x1="3" y1="10" x2="21" y2="10" />
+        </svg>
+        رسالة خاصة
+      </div>
+
+      <p class="s1-sub" data-reveal>معدّة خصيصاً لك، من قلبٍ يُحبّك في كل عيد</p>
+
+      <div class="music-pill" data-reveal onclick="goTo(4); setTimeout(()=>{ if(!playing) togglePlay(); }, 800);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18V5l12-2v13" />
+          <circle cx="6" cy="18" r="3" />
+          <circle cx="18" cy="16" r="3" />
+        </svg>
+        الموسيقى مختارة لك
+      </div>
+
+      <button class="btn-open" id="openBtn" data-reveal>
+        <span>افتح الرسالة</span>
+        <svg viewBox="0 0 24 24">
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+
+      <p class="extra-hint" data-reveal>مرّر للأسفل لاكتشاف الرسالة كاملة</p>
+    </section>
+
+    <!-- ══ SECTION 2 — EID GREETING ══ -->
+    <section class="sec" id="s2">
+      <div class="blob blob-gold"
+        style="width:380px;height:380px;top:8%;left:8%;opacity:.5;animation:blobFloat2 22s ease-in-out infinite;"></div>
+      <div class="blob blob-purple"
+        style="width:320px;height:320px;bottom:12%;right:8%;opacity:.6;animation:blobFloat1 20s ease-in-out infinite;">
+      </div>
+      <div class="blob blob-pink"
+        style="width:250px;height:250px;top:50%;left:50%;opacity:.25;animation:blobFloat3 15s ease-in-out infinite;">
+      </div>
+
+      <!-- Lantern -->
+      <div class="lantern lantern-center" data-reveal>
+        <svg width="40" height="85" viewBox="0 0 40 85" fill="none">
+          <line x1="20" y1="0" x2="20" y2="12" stroke="#d4a847" stroke-width="1.5"/>
+          <path d="M14 12 L26 12 L24 17 L16 17 Z" fill="#d4a847"/>
+          <path d="M16 17 Q12 32 13 50 Q15 60 20 64 Q25 60 27 50 Q28 32 24 17 Z"
+                fill="url(#lanternGrad)" stroke="#d4a847" stroke-width="1"/>
+          <line x1="15" y1="30" x2="25" y2="30" stroke="#d4a84760" stroke-width="0.7"/>
+          <line x1="14" y1="42" x2="26" y2="42" stroke="#d4a84760" stroke-width="0.7"/>
+          <ellipse cx="20" cy="38" rx="4" ry="12" fill="#f0d07830"/>
+          <path d="M17 64 L23 64 L22 69 L18 69 Z" fill="#d4a847"/>
+          <line x1="20" y1="69" x2="20" y2="78" stroke="#d4a847" stroke-width="1"/>
+          <circle cx="20" cy="80" r="2.5" fill="#d4a847"/>
+        </svg>
+      </div>
+
+      <!-- Enhanced Crescent with Stars -->
+      <div class="crescent-wrap" data-reveal>
+        <div class="crescent-stars">
+          <span class="crescent-star" style="top:5px;left:0;font-size:10px;animation-delay:0s;">✦</span>
+          <span class="crescent-star" style="top:-8px;left:40%;font-size:14px;animation-delay:.5s;">✦</span>
+          <span class="crescent-star" style="top:10px;right:0;font-size:8px;animation-delay:1s;">✦</span>
+          <span class="crescent-star" style="bottom:5px;left:15%;font-size:9px;animation-delay:1.5s;">✦</span>
+          <span class="crescent-star" style="bottom:0;right:10%;font-size:11px;animation-delay:.7s;">✦</span>
+        </div>
+        <svg width="80" height="80" viewBox="0 0 60 60" fill="none">
+          <path d="M42 8 A24 24 0 1 0 42 52 A18 18 0 1 1 42 8Z" fill="url(#moonGrad)" opacity="0.9" />
+          <path d="M42 8 A24 24 0 1 0 42 52 A18 18 0 1 1 42 8Z" fill="none" stroke="url(#moonGrad)"
+            stroke-width="1.5" stroke-linejoin="round" />
+        </svg>
+      </div>
+
+      <div class="badge" data-reveal style="margin-bottom:18px;">Eid Al-Fitr</div>
+
+      <!-- VAPOUR TEXT for greeting -->
+      <div class="vapour-wrap" id="vwrap2"></div>
+
+      <!-- TEXT LOOP 2 -->
+      <div class="text-loop-container" style="margin-top:10px;">
+        <div class="text-loop-wrapper" id="textLoop2">
+          <div class="text-loop-item active" style="font-size:clamp(1.8rem,5vw,3rem);">عيد فطر سعيد</div>
+          <div class="text-loop-item" style="font-size:clamp(1.8rem,5vw,3rem);">أسعد الله أيامكم</div>
+          <div class="text-loop-item" style="font-size:clamp(1.8rem,5vw,3rem);">بارك الله فيكم</div>
+        </div>
+      </div>
+
+      <p class="s2-from" data-reveal>من <b>قلبٍ مُحبّ</b> يُهنّئكم</p>
+
+      <!-- Ornamental Divider -->
+      <svg class="ornamental-divider" data-reveal viewBox="0 0 240 24" fill="none">
+        <line x1="15" y1="12" x2="95" y2="12" stroke="url(#goldGradH)" stroke-width="1" />
+        <line x1="145" y1="12" x2="225" y2="12" stroke="url(#goldGradH)" stroke-width="1" />
+        <polygon points="120,3 129,12 120,21 111,12" fill="none" stroke="#d4a847" stroke-width="1.2" />
+        <polygon points="120,6 126,12 120,18 114,12" fill="#d4a84730" />
+        <circle cx="100" cy="12" r="2" fill="#d4a847" opacity="0.5" />
+        <circle cx="140" cy="12" r="2" fill="#d4a847" opacity="0.5" />
+        <circle cx="10" cy="12" r="1.5" fill="#d4a847" opacity="0.3" />
+        <circle cx="230" cy="12" r="1.5" fill="#d4a847" opacity="0.3" />
+      </svg>
+
+      <div class="arrow-down" data-reveal onclick="goTo(2)">
+        <span>اقرأ الرسالة</span>
+        <svg viewBox="0 0 24 24">
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- ══ SECTION 3 — MESSAGE ══ -->
+    <section class="sec" id="s3">
+      <div class="blob blob-gold"
+        style="width:400px;height:400px;bottom:0;right:-80px;opacity:.3;animation:blobFloat1 18s ease-in-out infinite;">
+      </div>
+      <div class="blob blob-purple"
+        style="width:250px;height:250px;top:10%;left:5%;opacity:.3;animation:blobFloat3 22s ease-in-out infinite;">
+      </div>
+      <div class="quote-mark" data-reveal>"</div>
+      <div class="msg-card" data-reveal>
+        <p class="msg-text">
+          عيد مبارك وكل عام وأنتم بخير<br>
+          أعاده الله عليكم بالصحة والعافية<br>
+          وأدام عليكم نعمة الأمان والسعادة
+          <span class="msg-heart">❤</span>
+        </p>
+        <div class="divider-simple" style="margin:24px auto;"></div>
+        <p class="msg-from">— معايدة خالصة من القلب —</p>
+      </div>
+
+      <div class="arrow-down" data-reveal onclick="goTo(3)" style="margin-top:30px;">
+        <span>شاهد الذكريات</span>
+        <svg viewBox="0 0 24 24">
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- ══ SECTION 4 — ALBUM ══ -->
+    <section class="sec" id="s4">
+      <div class="blob blob-purple"
+        style="width:420px;height:420px;top:-80px;left:-80px;opacity:.5;animation:blobFloat2 20s ease-in-out infinite;">
+      </div>
+      <div class="blob blob-gold"
+        style="width:300px;height:300px;bottom:-50px;right:-50px;opacity:.3;animation:blobFloat1 25s ease-in-out infinite;">
+      </div>
+
+      <!-- Lanterns -->
+      <div class="lantern lantern-left" data-reveal style="opacity:0.5;">
+        <svg width="32" height="70" viewBox="0 0 40 85" fill="none">
+          <line x1="20" y1="0" x2="20" y2="12" stroke="#d4a847" stroke-width="1.5"/>
+          <path d="M14 12 L26 12 L24 17 L16 17 Z" fill="#d4a847"/>
+          <path d="M16 17 Q12 32 13 50 Q15 60 20 64 Q25 60 27 50 Q28 32 24 17 Z"
+                fill="url(#lanternGrad)" stroke="#d4a847" stroke-width="1"/>
+          <ellipse cx="20" cy="38" rx="4" ry="12" fill="#f0d07830"/>
+          <path d="M17 64 L23 64 L22 69 L18 69 Z" fill="#d4a847"/>
+          <line x1="20" y1="69" x2="20" y2="78" stroke="#d4a847" stroke-width="1"/>
+          <circle cx="20" cy="80" r="2.5" fill="#d4a847"/>
+        </svg>
+      </div>
+      <div class="lantern lantern-right" data-reveal style="opacity:0.5;">
+        <svg width="32" height="70" viewBox="0 0 40 85" fill="none">
+          <line x1="20" y1="0" x2="20" y2="12" stroke="#d4a847" stroke-width="1.5"/>
+          <path d="M14 12 L26 12 L24 17 L16 17 Z" fill="#d4a847"/>
+          <path d="M16 17 Q12 32 13 50 Q15 60 20 64 Q25 60 27 50 Q28 32 24 17 Z"
+                fill="url(#lanternGrad)" stroke="#d4a847" stroke-width="1"/>
+          <ellipse cx="20" cy="38" rx="4" ry="12" fill="#f0d07830"/>
+          <path d="M17 64 L23 64 L22 69 L18 69 Z" fill="#d4a847"/>
+          <line x1="20" y1="69" x2="20" y2="78" stroke="#d4a847" stroke-width="1"/>
+          <circle cx="20" cy="80" r="2.5" fill="#d4a847"/>
+        </svg>
+      </div>
+
+      <p class="album-title" data-reveal>ألبوم الذكريات</p>
+
+      <div class="book-container" data-reveal>
+        <!-- Base cover (visible when all pages flipped) -->
+        <div class="book-base">
+          <div class="book-base-content">
+            <div class="book-base-icon">🌙</div>
+            <p class="book-base-text">كل عام وأنتم بخير</p>
+            <p class="book-base-sub">اضغط للرجوع</p>
+          </div>
+        </div>
+
+        <!-- Page 2 (bottom layer) -->
+        <div class="book-page" data-page="1">
+          <div class="page-front">
+            <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+              <rect width="180" height="180" fill="#fff5f9" />
+              <circle cx="55" cy="105" r="28" fill="#fff" stroke="#f8bbd9" stroke-width="2" />
+              <ellipse cx="44" cy="75" rx="8" ry="20" fill="#fff" stroke="#f8bbd9" stroke-width="2" />
+              <ellipse cx="44" cy="75" rx="4" ry="14" fill="#ffb3cc" opacity=".6" />
+              <ellipse cx="62" cy="72" rx="7" ry="18" fill="#fff" stroke="#f8bbd9" stroke-width="2" />
+              <ellipse cx="62" cy="72" rx="3.5" ry="12" fill="#ffb3cc" opacity=".6" />
+              <ellipse cx="47" cy="103" rx="3.5" ry="4.5" fill="#333" />
+              <ellipse cx="63" cy="103" rx="3.5" ry="4.5" fill="#333" />
+              <circle cx="48.5" cy="101.5" r="1.5" fill="#fff" />
+              <circle cx="64.5" cy="101.5" r="1.5" fill="#fff" />
+              <ellipse cx="42" cy="111" rx="6" ry="4" fill="#ffb3cc" opacity=".55" />
+              <ellipse cx="68" cy="111" rx="6" ry="4" fill="#ffb3cc" opacity=".55" />
+              <path d="M51 112 Q55 117 59 112" stroke="#f06292" stroke-width="1.5" fill="none" stroke-linecap="round" />
+              <circle cx="125" cy="105" r="28" fill="#fff" stroke="#f8bbd9" stroke-width="2" />
+              <ellipse cx="114" cy="72" rx="7" ry="18" fill="#fff" stroke="#f8bbd9" stroke-width="2" />
+              <ellipse cx="114" cy="72" rx="3.5" ry="12" fill="#ffb3cc" opacity=".6" />
+              <ellipse cx="136" cy="75" rx="8" ry="20" fill="#fff" stroke="#f8bbd9" stroke-width="2" />
+              <ellipse cx="136" cy="75" rx="4" ry="14" fill="#ffb3cc" opacity=".6" />
+              <ellipse cx="117" cy="103" rx="3.5" ry="4.5" fill="#333" />
+              <ellipse cx="133" cy="103" rx="3.5" ry="4.5" fill="#333" />
+              <circle cx="118.5" cy="101.5" r="1.5" fill="#fff" />
+              <circle cx="134.5" cy="101.5" r="1.5" fill="#fff" />
+              <ellipse cx="112" cy="111" rx="6" ry="4" fill="#ffb3cc" opacity=".55" />
+              <ellipse cx="138" cy="111" rx="6" ry="4" fill="#ffb3cc" opacity=".55" />
+              <path d="M121 112 Q125 117 129 112" stroke="#f06292" stroke-width="1.5" fill="none" stroke-linecap="round" />
+              <text x="83" y="100" font-size="22" fill="#e91e8c" text-anchor="middle">♥</text>
+              <text x="83" y="125" font-size="13" fill="#d4a847" text-anchor="middle">✦</text>
+              <text x="15" y="50" font-size="11" fill="#d4a847">✦</text>
+              <text x="148" y="45" font-size="11" fill="#f0d078">✦</text>
+            </svg>
+          </div>
+          <div class="page-back">
+            <div class="page-back-content">
+              <div class="page-back-icon">🌙</div>
+              <p class="page-back-text">عيد مبارك</p>
+              <p class="page-back-sub">كل عام وأنتم بخير</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 1 (top layer) -->
+        <div class="book-page" data-page="0">
+          <div class="page-front">
+            <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+              <rect width="180" height="180" fill="#fff5f9" />
+              <ellipse cx="90" cy="120" rx="42" ry="40" fill="#fff" stroke="#f8bbd9" stroke-width="2" />
+              <circle cx="90" cy="75" r="35" fill="#fff" stroke="#f8bbd9" stroke-width="2" />
+              <ellipse cx="79" cy="72" rx="5" ry="6" fill="#333" />
+              <ellipse cx="101" cy="72" rx="5" ry="6" fill="#333" />
+              <circle cx="81" cy="70" r="2" fill="#fff" />
+              <circle cx="103" cy="70" r="2" fill="#fff" />
+              <ellipse cx="70" cy="82" rx="8" ry="5" fill="#ffb3cc" opacity=".6" />
+              <ellipse cx="110" cy="82" rx="8" ry="5" fill="#ffb3cc" opacity=".6" />
+              <path d="M82 85 Q90 92 98 85" stroke="#f06292" stroke-width="2" fill="none" stroke-linecap="round" />
+              <circle cx="90" cy="42" r="6" fill="#d4a847" />
+              <circle cx="82" cy="44" r="5" fill="#f0d078" />
+              <circle cx="98" cy="44" r="5" fill="#d4a847" />
+              <circle cx="86" cy="37" r="5" fill="#f0d078" />
+              <circle cx="94" cy="37" r="5" fill="#d4a847" />
+              <circle cx="90" cy="43" r="4" fill="#ffdd66" />
+              <text x="28" y="45" font-size="16" fill="#d4a847">✦</text>
+              <text x="118" y="38" font-size="20" fill="#d4a847">✦</text>
+              <text x="138" y="60" font-size="12" fill="#f0d078">✦</text>
+              <text x="15" y="70" font-size="12" fill="#d4a847">✦</text>
+              <text x="48" y="28" font-size="12" fill="#ffdd66">✦</text>
+              <text x="105" y="22" font-size="14" fill="#d4a847">✦</text>
+              <ellipse cx="55" cy="125" rx="10" ry="18" fill="#fff" stroke="#f8bbd9" stroke-width="2"
+                transform="rotate(-20,55,125)" />
+              <ellipse cx="125" cy="125" rx="10" ry="18" fill="#fff" stroke="#f8bbd9" stroke-width="2"
+                transform="rotate(20,125,125)" />
+            </svg>
+          </div>
+          <div class="page-back">
+            <div class="page-back-content">
+              <div class="page-back-icon">✦</div>
+              <p class="page-back-text">ذكرى جميلة</p>
+              <p class="page-back-sub">اقلب للمزيد</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="book-nav" data-reveal>
+        <button class="book-nav-btn" id="bookPrev" aria-label="السابق">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <span class="book-page-indicator" id="bookIndicator">1 / 2</span>
+        <button class="book-nav-btn" id="bookNext" aria-label="التالي">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+      </div>
+
+      <p class="album-hint" data-reveal>اقلب الصفحات لمشاهدة الذكريات</p>
+
+      <div class="arrow-down" data-reveal onclick="goTo(4)" style="margin-top:22px;">
+        <span>اسمع الموسيقى</span>
+        <svg viewBox="0 0 24 24">
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- ══ SECTION 5 — MUSIC ══ -->
+    <section class="sec" id="s5">
+      <div class="blob blob-gold"
+        style="width:380px;height:380px;top:-40px;right:-40px;opacity:.4;animation:blobFloat1 22s ease-in-out infinite;">
+      </div>
+      <div class="blob blob-purple"
+        style="width:350px;height:350px;bottom:0;left:-60px;opacity:.55;animation:blobFloat2 18s ease-in-out infinite;">
+      </div>
+
+      <div class="music-icon-wrap" data-reveal>
+        <div class="music-orb">
+          <svg viewBox="0 0 24 24">
+            <path d="M9 18V5l12-2v13" />
+            <circle cx="6" cy="18" r="3" />
+            <circle cx="18" cy="16" r="3" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="visualizer" id="visualizer" data-reveal></div>
+
+      <h2 class="music-title" data-reveal>عيد وحب</h2>
+      <p class="music-sub" data-reveal><b>كاظم الساهر</b> — اخترناها خصيصاً لهذه المناسبة</p>
+
+      <div class="player-bar" data-reveal>
+        <span class="player-time" id="ptime">0:00</span>
+        <div class="player-track" id="ptrack">
+          <div class="player-fill" id="pfill"></div>
+        </div>
+        <span class="player-time" id="pdur">--:--</span>
+        <button class="play-btn" id="playBtn" aria-label="تشغيل">
+          <svg id="playIcon" viewBox="0 0 24 24">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+        </button>
+      </div>
+
+      <p class="footer-text" data-reveal>عيد مبارك وكل عام وأنتم بخير</p>
+      <p class="footer-text" data-reveal style="margin-top:8px;">
+        <a href="index.html" style="color:rgba(212,168,71,.35);text-decoration:none;font-size:.7rem;">سياسة الخصوصية</a>
+      </p>
+    </section>
+
+  </div>
+
+  <script>
+    /* ═════════════════════════════════════
+       INITIALIZATION
+    ══════════════════════════════════════ */
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth < 768;
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+        revealSection(0);
+      }, prefersReducedMotion ? 100 : 1800);
+    });
+
+    /* ═════════════════════════════════════
+       STARS
+    ══════════════════════════════════════ */
+    const starsCanvas = document.getElementById('stars-canvas');
+    const starsCtx = starsCanvas.getContext('2d');
+    let stars = [];
+
+    function initStars() {
+      starsCanvas.width = innerWidth;
+      starsCanvas.height = innerHeight;
+      const count = isMobile ? 70 : 120;
+      stars = Array.from({ length: count }, () => ({
+        x: Math.random() * starsCanvas.width,
+        y: Math.random() * starsCanvas.height,
+        r: Math.random() * 1.8 + 0.4,
+        phase: Math.random() * Math.PI * 2,
+        speed: 0.3 + Math.random() * 1.2,
+        baseAlpha: 0.3 + Math.random() * 0.5,
+        isGold: Math.random() < 0.25
+      }));
+    }
+    initStars();
+    window.addEventListener('resize', initStars);
+
+    function drawStars(t) {
+      starsCtx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
+      stars.forEach(s => {
+        const twinkle = prefersReducedMotion ? 1 : 0.5 + 0.5 * Math.sin(s.phase + t * s.speed);
+        starsCtx.globalAlpha = s.baseAlpha * twinkle;
+        starsCtx.fillStyle = s.isGold ? '#f0d078' : '#fff';
+        const d = s.r * 2;
+        starsCtx.fillRect(s.x - s.r, s.y - s.r, d, d);
+      });
+      starsCtx.globalAlpha = 1;
+    }
+
+    /* ═════════════════════════════════════
+       FLOATING PARTICLES
+    ══════════════════════════════════════ */
+    const particlesContainer = document.getElementById('particles-container');
+
+    function createParticles() {
+      if (prefersReducedMotion) return;
+      const count = isMobile ? 8 : 12;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        const isGold = i % 3 === 0;
+        p.className = 'particle ' + (isGold ? 'particle-gold' : 'particle-pink');
+        const size = 2 + Math.random() * 4;
+        p.style.cssText = `
+          width:${size}px;height:${size}px;
+          left:${Math.random() * 100}%;
+          --duration:${12 + Math.random() * 10}s;
+          --delay:${Math.random() * 10}s;
+        `;
+        particlesContainer.appendChild(p);
+      }
+    }
+    createParticles();
+
+    /* ═════════════════════════════════════
+       FIREWORKS
+    ══════════════════════════════════════ */
+    const fwCanvas = document.getElementById('fw-canvas');
+    const fwCtx = fwCanvas.getContext('2d');
+
+    function resizeFW() {
+      fwCanvas.width = innerWidth;
+      fwCanvas.height = innerHeight;
+    }
+    resizeFW();
+    window.addEventListener('resize', resizeFW);
+
+    const fwColors = ['#d4a847', '#f0d078', '#e91e8c', '#ff6bb3', '#c2185b', '#ffdd66', '#fff'];
+    let fwParticles = [];
+
+    const FW_MAX = isMobile ? 150 : 300;
+
+    class FWParticle {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 1.5 + Math.random() * 5;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed;
+        this.life = 1;
+        this.decay = 0.015 + Math.random() * 0.025;
+        this.r = 1.5 + Math.random() * 2;
+        this.prevX = x;
+        this.prevY = y;
+      }
+
+      update() {
+        this.prevX = this.x;
+        this.prevY = this.y;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.vy += 0.08;
+        this.vx *= 0.97;
+        this.life -= this.decay;
+      }
+
+      draw() {
+        // Simple trail line instead of expensive shadowBlur
+        fwCtx.globalAlpha = this.life * 0.2;
+        fwCtx.fillStyle = this.color;
+        fwCtx.fillRect(this.prevX - this.r * 0.3, this.prevY - this.r * 0.3, this.r * 0.6, this.r * 0.6);
+
+        fwCtx.globalAlpha = this.life;
+        fwCtx.fillStyle = this.color;
+        fwCtx.fillRect(this.x - this.r, this.y - this.r, this.r * 2, this.r * 2);
+        fwCtx.globalAlpha = 1;
+      }
+    }
+
+    function launchFirework(x, y) {
+      if (fwParticles.length > FW_MAX) return;
+      const c1 = fwColors[Math.floor(Math.random() * fwColors.length)];
+      const c2 = fwColors[Math.floor(Math.random() * fwColors.length)];
+      const count = isMobile ? (20 + Math.floor(Math.random() * 20)) : (35 + Math.floor(Math.random() * 30));
+      for (let i = 0; i < count; i++) {
+        fwParticles.push(new FWParticle(x, y, i % 2 ? c1 : c2));
+      }
+    }
+
+    function autoFirework() {
+      if (prefersReducedMotion) return;
+      const x = 80 + Math.random() * (innerWidth - 160);
+      const y = 60 + Math.random() * (innerHeight * 0.45);
+      launchFirework(x, y);
+    }
+
+    if (!isMobile) autoFirework();
+    setInterval(autoFirework, isMobile ? 9000 : 6500);
+
+    const fireColors = ['#ff6a00', '#ff9500', '#ffd000', '#d4a847', '#f0d078', '#ff4500', '#ffaa00'];
+    let lastClickFW = 0;
+
+    function createFireburst(x, y) {
+      if (fwParticles.length > FW_MAX) return;
+      const c1 = fireColors[Math.floor(Math.random() * fireColors.length)];
+      const c2 = fireColors[Math.floor(Math.random() * fireColors.length)];
+      const count = isMobile ? 12 : 20;
+      for (let i = 0; i < count; i++) {
+        fwParticles.push(new FWParticle(x, y, i % 2 ? c1 : c2));
+      }
+    }
+
+    document.addEventListener('click', e => {
+      if (prefersReducedMotion) return;
+      const now = Date.now();
+      const x = e.clientX;
+      const y = e.clientY;
+
+      // Fireball burst on every click (throttled)
+      if (now - lastClickFW > 300) {
+        createFireburst(x, y);
+        lastClickFW = now;
+      }
+
+      // Fire flash at click point
+      const flash = document.createElement('div');
+      flash.className = 'click-flash';
+      flash.style.left = x + 'px';
+      flash.style.top = y + 'px';
+      document.body.appendChild(flash);
+
+      // Fire ring
+      const ring = document.createElement('div');
+      ring.className = 'click-ring';
+      ring.style.left = x + 'px';
+      ring.style.top = y + 'px';
+      document.body.appendChild(ring);
+
+      setTimeout(() => { flash.remove(); ring.remove(); }, 700);
+    });
+
+    /* ═════════════════════════════════════
+       TEXT LOOP ANIMATION (BUG FIXED)
+    ══════════════════════════════════════ */
+    class TextLoop {
+      constructor(wrapperEl, interval = 3000) {
+        this.wrapper = wrapperEl;
+        this.items = wrapperEl.querySelectorAll('.text-loop-item');
+        this.currentIndex = 0;
+        this.interval = interval;
+        this.timer = null;
+        this.isPaused = false;
+        this.init();
+      }
+
+      init() {
+        this.items[0].classList.add('active');
+        this.start();
+
+        this.wrapper.addEventListener('mouseenter', () => this.pause());
+        this.wrapper.addEventListener('mouseleave', () => this.resume());
+      }
+
+      next() {
+        const current = this.items[this.currentIndex];
+        const nextIndex = (this.currentIndex + 1) % this.items.length;
+        const nextItem = this.items[nextIndex];
+
+        current.classList.remove('active');
+        current.classList.add('exit');
+
+        setTimeout(() => {
+          current.classList.remove('exit');
+          nextItem.classList.add('active');
+          this.currentIndex = nextIndex;
+        }, 350);
+      }
+
+      start() {
+        if (prefersReducedMotion) return;
+        if (this.timer) clearInterval(this.timer);
+        this.timer = setInterval(() => this.next(), this.interval);
+      }
+
+      pause() {
+        this.isPaused = true;
+        if (this.timer) {
+          clearInterval(this.timer);
+          this.timer = null;
+        }
+      }
+
+      resume() {
+        this.isPaused = false;
+        this.start();
+      }
+    }
+
+    const textLoop2 = new TextLoop(document.getElementById('textLoop2'), 4000);
+
+    /* ═════════════════════════════════════
+       VAPOUR TEXT (BUG FIXED)
+    ══════════════════════════════════════ */
+    const DPR = Math.min(window.devicePixelRatio * 1.3, 2.5);
+
+    class VapourText {
+      constructor(wrap, text, fontSize, color = 'rgba(255,255,255,1)') {
+        this.wrap = wrap;
+        this.text = text;
+        this.baseFontSize = fontSize;
+        this.color = color;
+        this.canvas = document.createElement('canvas');
+        this.canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;';
+        wrap.appendChild(this.canvas);
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.revealed = false;
+        this.fadeProgress = 0;
+        this.sampleStep = 1;
+        this.build();
+      }
+
+      get fontSize() { return this.baseFontSize * DPR; }
+      get font() { return `700 ${this.fontSize}px 'Scheherazade New', serif`; }
+
+      build() {
+        const w = this.wrap.clientWidth || 300;
+        const h = this.wrap.clientHeight || 120;
+        this.canvas.width = Math.floor(w * DPR);
+        this.canvas.height = Math.floor(h * DPR);
+        this.canvas.style.width = w + 'px';
+        this.canvas.style.height = h + 'px';
+        this._sample();
+      }
+
+      _sample() {
+        const ctx = this.ctx;
+        const W = this.canvas.width, H = this.canvas.height;
+        ctx.clearRect(0, 0, W, H);
+        ctx.font = this.font;
+        ctx.fillStyle = this.color;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.text, W / 2, H / 2);
+
+        const img = ctx.getImageData(0, 0, W, H);
+        const d = img.data;
+        this.particles = [];
+        const step = Math.max(1, Math.round(DPR * 0.9));
+        this.sampleStep = step;
+        for (let y = 0; y < H; y += step) {
+          for (let x = 0; x < W; x += step) {
+            const i = (y * W + x) * 4;
+            if (d[i + 3] > 30) {
+              const a = d[i + 3] / 255;
+              this.particles.push({
+                x, y, ox: x, oy: y,
+                color: `rgba(${d[i]},${d[i + 1]},${d[i + 2]},`,
+                alpha: a, oa: a
+              });
+            }
+          }
+        }
+        ctx.clearRect(0, 0, W, H);
+      }
+
+      reveal() {
+        if (this.revealed) return;
+        this.revealed = true;
+        this.fadeProgress = 0;
+      }
+
+      update(dt) {
+        if (!this.revealed || this.done) return;
+        const ctx = this.ctx;
+        const W = this.canvas.width, H = this.canvas.height;
+        ctx.clearRect(0, 0, W, H);
+
+        this.fadeProgress = Math.min(1, this.fadeProgress + dt * 0.9);
+        const f = this.fadeProgress;
+        const step = this.sampleStep;
+
+        this.particles.forEach(p => {
+          const a = f * p.oa;
+          ctx.fillStyle = p.color + a + ')';
+          ctx.fillRect(p.ox, p.oy, step, step);
+        });
+
+        if (f >= 1) this.done = true;
+      }
+
+      resize() { this.build(); }
+    }
+
+    let vapourText2 = null;
+
+    function buildVapour() {
+      const w2 = document.getElementById('vwrap2');
+      w2.innerHTML = '';
+      const fs2 = Math.max(22, Math.min(48, innerWidth * 0.07));
+      vapourText2 = new VapourText(w2, 'عيد فطر مبارك', fs2, 'rgba(255,255,255,1)');
+    }
+    buildVapour();
+    window.addEventListener('resize', buildVapour);
+
+    /* ═════════════════════════════════════
+       SCROLL & SECTION MANAGEMENT
+    ══════════════════════════════════════ */
+    const app = document.getElementById('app');
+    const sections = [...document.querySelectorAll('.sec')];
+    const dots = document.querySelectorAll('.dot');
+    let currentSection = 0;
+    const revealedSections = new Set();
+
+    function goTo(i) {
+      sections[i].scrollIntoView({ behavior: 'smooth' });
+    }
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => goTo(i));
+    });
+
+    function revealSection(index) {
+      if (revealedSections.has(index)) return;
+      revealedSections.add(index);
+
+      const section = sections[index];
+      const elements = section.querySelectorAll('[data-reveal]');
+
+      elements.forEach((el, i) => {
+        setTimeout(() => {
+          el.classList.add('visible');
+        }, i * 100);
+      });
+
+      if (index === 1 && vapourText2) {
+        setTimeout(() => vapourText2.reveal(), 400);
+      }
+
+      if (!prefersReducedMotion) {
+        setTimeout(() => {
+          launchFirework(
+            80 + Math.random() * (innerWidth - 160),
+            80 + Math.random() * (innerHeight * 0.4)
+          );
+          setTimeout(() => {
+            launchFirework(
+              80 + Math.random() * (innerWidth - 160),
+              80 + Math.random() * (innerHeight * 0.4)
+            );
+          }, 600);
+        }, 300);
+      }
+    }
+
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const i = sections.indexOf(entry.target);
+          if (i < 0) return;
+          currentSection = i;
+          dots.forEach((d, j) => d.classList.toggle('active', j === i));
+          revealSection(i);
+        }
+      });
+    }, { threshold: 0.55 });
+
+    sections.forEach(s => sectionObserver.observe(s));
+
+    /* ═════════════════════════════════════
+       EMBER PARTICLES (Section 1)
+    ══════════════════════════════════════ */
+    function createEmbers() {
+      if (prefersReducedMotion) return;
+      const container = document.getElementById('emberContainer');
+      if (!container) return;
+      const count = isMobile ? 8 : 14;
+      for (let i = 0; i < count; i++) {
+        const ember = document.createElement('div');
+        ember.className = 'ember';
+        const size = 2 + Math.random() * 4;
+        const hue = 20 + Math.random() * 30;
+        const lightness = 55 + Math.random() * 15;
+        ember.style.cssText = `
+          width:${size}px;height:${size}px;
+          left:${10 + Math.random() * 80}%;
+          bottom:${-5 + Math.random() * 15}%;
+          background: hsl(${hue},100%,${lightness}%);
+          --dur:${7 + Math.random() * 8}s;
+          --del:${Math.random() * 8}s;
+          --drift:${-30 + Math.random() * 60}px;
+          --drift2:${-40 + Math.random() * 80}px;
+        `;
+        container.appendChild(ember);
+      }
+    }
+    createEmbers();
+
+    /* ═════════════════════════════════════
+       BOOK FLIP (Album Section)
+    ══════════════════════════════════════ */
+    const bookPages = [...document.querySelectorAll('.book-page')];
+    const bookIndicator = document.getElementById('bookIndicator');
+    const bookNextBtn = document.getElementById('bookNext');
+    const bookPrevBtn = document.getElementById('bookPrev');
+    let currentBookPage = 0;
+    const totalBookPages = bookPages.length;
+    let bookAnimating = false;
+
+    function updateBookUI() {
+      if (bookIndicator) bookIndicator.textContent = `${Math.min(currentBookPage + 1, totalBookPages)} / ${totalBookPages}`;
+      if (bookPrevBtn) bookPrevBtn.disabled = currentBookPage === 0;
+      if (bookNextBtn) bookNextBtn.disabled = currentBookPage >= totalBookPages;
+    }
+
+    function flipToPage(pageIndex) {
+      pageIndex = Math.max(0, Math.min(totalBookPages, pageIndex));
+      if (pageIndex === currentBookPage) return;
+      bookAnimating = true;
+
+      bookPages.forEach(page => {
+        const idx = parseInt(page.dataset.page);
+        if (idx < pageIndex) {
+          page.classList.add('flipped');
+        } else {
+          page.classList.remove('flipped');
+        }
+      });
+
+      currentBookPage = pageIndex;
+      updateBookUI();
+      setTimeout(() => { bookAnimating = false; }, 850);
+    }
+
+    // Click on pages: unflipped → flip forward, flipped → flip back
+    bookPages.forEach(page => {
+      page.addEventListener('click', e => {
+        e.stopPropagation();
+        if (bookAnimating) return;
+        const idx = parseInt(page.dataset.page);
+
+        if (!page.classList.contains('flipped')) {
+          flipToPage(idx + 1);
+        } else {
+          flipToPage(idx);
+        }
+      });
+    });
+
+    // Click on base card → reset all
+    const bookBase = document.querySelector('.book-base');
+    if (bookBase) {
+      bookBase.addEventListener('click', e => {
+        e.stopPropagation();
+        if (bookAnimating) return;
+        flipToPage(0);
+      });
+    }
+
+    if (bookNextBtn) {
+      bookNextBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        if (bookAnimating) return;
+        if (currentBookPage < totalBookPages) flipToPage(currentBookPage + 1);
+      });
+    }
+
+    if (bookPrevBtn) {
+      bookPrevBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        if (bookAnimating) return;
+        if (currentBookPage > 0) flipToPage(currentBookPage - 1);
+      });
+    }
+
+    updateBookUI();
+
+    /* ═════════════════════════════════════
+       BUTTON RIPPLE + NAVIGATION (BUG FIXED)
+    ══════════════════════════════════════ */
+    function createRipple(e) {
+      const btn = e.currentTarget;
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      const rect = btn.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
+      ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    }
+
+    document.getElementById('openBtn').addEventListener('click', e => {
+      createRipple(e);
+      setTimeout(() => goTo(1), 300);
+    });
+
+    /* ═════════════════════════════════════
+       VISUALIZER BARS
+    ══════════════════════════════════════ */
+    const vizEl = document.getElementById('visualizer');
+    const barHeights = [10, 18, 28, 38, 46, 36, 26, 40, 32, 20, 34, 44, 26, 18, 12, 22, 34, 42, 36, 22, 14];
+    barHeights.forEach((h, i) => {
+      const bar = document.createElement('div');
+      bar.className = 'viz-bar';
+      bar.style.cssText = `--h:${h}px;--d:${0.3 + Math.random() * 0.7}s;animation-delay:${i * 0.07}s;`;
+      vizEl.appendChild(bar);
+    });
+
+    /* ═════════════════════════════════════
+       MUSIC PLAYER (REAL AUDIO)
+    ══════════════════════════════════════ */
+    const audio = document.getElementById('bgAudio');
+    let playing = false;
+
+    const pfill = document.getElementById('pfill');
+    const ptime = document.getElementById('ptime');
+    const pdur = document.getElementById('pdur');
+    const playIcon = document.getElementById('playIcon');
+    const vizBars = document.querySelectorAll('.viz-bar');
+
+    function formatTime(s) {
+      if (!isFinite(s)) return '0:00';
+      const m = Math.floor(s / 60);
+      return `${m}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+    }
+
+    // Update duration display when audio metadata loads
+    audio.addEventListener('loadedmetadata', () => {
+      pdur.textContent = formatTime(audio.duration);
+    });
+
+    // If duration is already available
+    if (audio.duration) {
+      pdur.textContent = formatTime(audio.duration);
+    }
+
+    function updatePlayIcon() {
+      playIcon.innerHTML = playing
+        ? '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>'
+        : '<polygon points="5 3 19 12 5 21 5 3"/>';
+
+      vizBars.forEach(bar => {
+        bar.style.animationPlayState = playing ? 'running' : 'paused';
+      });
+    }
+
+    function togglePlay() {
+      if (playing) {
+        audio.pause();
+      } else {
+        audio.play().catch(() => {
+          // Browser blocked autoplay — user interaction needed
+          playing = false;
+          updatePlayIcon();
+        });
+      }
+    }
+
+    audio.addEventListener('play', () => {
+      playing = true;
+      updatePlayIcon();
+    });
+
+    audio.addEventListener('pause', () => {
+      playing = false;
+      updatePlayIcon();
+    });
+
+    audio.addEventListener('ended', () => {
+      playing = false;
+      updatePlayIcon();
+      pfill.style.width = '0%';
+      ptime.textContent = '0:00';
+      audio.currentTime = 0;
+    });
+
+    document.getElementById('playBtn').addEventListener('click', togglePlay);
+
+    // Track click to seek
+    document.getElementById('ptrack').addEventListener('click', e => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      if (isFinite(audio.duration)) {
+        audio.currentTime = ratio * audio.duration;
+        pfill.style.width = ratio * 100 + '%';
+        ptime.textContent = formatTime(audio.currentTime);
+      }
+    });
+
+    /* ═════════════════════════════════════
+       BLOB FLOATING ANIMATIONS
+    ══════════════════════════════════════ */
+    if (!prefersReducedMotion) {
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes blobFloat1 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(40px, -30px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+        @keyframes blobFloat2 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(-30px, 40px) scale(1.05); }
+          66% { transform: translate(25px, -25px) scale(1.1); }
+        }
+        @keyframes blobFloat3 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(30px, -40px) scale(1.15); }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    /* ═════════════════════════════════════
+       MAIN ANIMATION LOOP
+    ══════════════════════════════════════ */
+    let lastTime = 0;
+    let frameCount = 0;
+
+    function mainLoop(timestamp) {
+      requestAnimationFrame(mainLoop);
+      const t = timestamp * 0.001;
+      const dt = Math.min(t - lastTime, 0.05);
+      lastTime = t;
+      frameCount++;
+
+      drawStars(t);
+
+      if (fwParticles.length > 0) {
+        fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+        fwParticles = fwParticles.filter(p => p.life > 0);
+        fwParticles.forEach(p => {
+          p.update();
+          p.draw();
+        });
+      }
+
+      if (vapourText2) vapourText2.update(dt);
+
+      // Sync player UI every 4th frame (~15fps for UI is fine)
+      if (playing && (frameCount & 3) === 0 && isFinite(audio.duration) && audio.duration > 0) {
+        const ratio = audio.currentTime / audio.duration;
+        pfill.style.width = (ratio * 100) + '%';
+        ptime.textContent = formatTime(audio.currentTime);
+      }
+    }
+
+    requestAnimationFrame(mainLoop);
+  </script>
+</body>
+
+</html>
