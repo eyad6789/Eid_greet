@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./.git/**)",
+      "Read(./**/.git/**)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./**/.env)",
+      "Read(./**/*.zip)",
+      "Read(./**/*.tar.gz)",
+      "Read(./**/*.mp4)",
+      "Read(./**/*.psd)",
+      "Read(./**/*.m4a)",
+      "Read(./**/*.jpg)",
+      "Read(./eid-song.m4a)",
+      "Read(./photo_2026-03-20_00-37-11.jpg)"
+    ]
+  }
+}
